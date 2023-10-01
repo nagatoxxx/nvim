@@ -19,8 +19,8 @@ return {
     },
 
     {
-        "catppuccin/nvim", 
-        name = "catppuccin", 
+        "catppuccin/nvim",
+        name = "catppuccin",
         priority = 1000,
         opts = function()
             return require('plugins.configs.catppuccin')
@@ -28,8 +28,8 @@ return {
     },
 
     {
-        'akinsho/bufferline.nvim', 
-        version = "*", 
+        'akinsho/bufferline.nvim',
+        version = "*",
         dependencies = 'nvim-tree/nvim-web-devicons',
         config = function()
             require('plugins.configs.bufferline')
@@ -69,11 +69,9 @@ return {
 
     {
         'neovim/nvim-lspconfig',
-        config = function(args)
+        config = function()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
             require('lspconfig')['clangd'].setup{
-                -- on_attach = function()
-                -- end,
                 capabilities = capabilities,
                 cmd = {
                     "clangd",
@@ -84,6 +82,12 @@ return {
                 },
             }
             require('lspconfig')['cmake'].setup{
+                capabilities = capabilities,
+            }
+            require('lspconfig')['pyright'].setup{
+                capabilities = capabilities,
+            }
+            require('lspconfig')['lua_ls'].setup{
                 capabilities = capabilities,
             }
         end,
@@ -116,7 +120,7 @@ return {
 
     {
         'norcalli/nvim-colorizer.lua',
-        config = function(args)
+        config = function()
             vim.opt.termguicolors = true
             require('colorizer').setup()
         end,
@@ -129,7 +133,6 @@ return {
         opts = {
             indent = {
                 char = '│',
-                highlight = hl_name_list
             },
             scope = {enabled = false},
         }
@@ -137,7 +140,7 @@ return {
 
     {
         'nvim-lualine/lualine.nvim',
-        config = function(args)
+        config = function()
             require('plugins.configs.lualine')
         end,
     },
@@ -147,7 +150,7 @@ return {
         version = "2.*",
         build = "make install_jsregexp",
         dependencies = { "rafamadriz/friendly-snippets" },
-        config = function(args)
+        config = function()
             require("luasnip.loaders.from_vscode").lazy_load()
         end,
     },
@@ -176,4 +179,11 @@ return {
             -- }
         }
     },
+
+    {
+        'williamboman/mason-lspconfig.nvim',
+        opts = {
+            ensure_installed = {'clangd', 'pyright', 'lua_ls'}
+        }
+    }
 }
