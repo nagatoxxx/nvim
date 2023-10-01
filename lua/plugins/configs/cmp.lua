@@ -1,18 +1,5 @@
 local cmp = require('cmp')
 
--- local function border(hl_name)
---   return {
---     { "┌", hl_name },
---     { "─", hl_name },
---     { "┐", hl_name },
---     { "│", hl_name },
---     { "┘", hl_name },
---     { "─", hl_name },
---     { "└", hl_name },
---     { "│", hl_name },
---   }
--- end
---
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -39,7 +26,10 @@ cmp.setup({
             },
             max_item_count = 4,
         },
-        { name = 'nvim_lsp', max_item_count = 8 },
+        { 
+            name = 'nvim_lsp', 
+            max_item_count = 8,
+        },
         { name = 'nvim_lsp_signature_help'},
         { name = 'buffer'}, 
         { name = 'path' },

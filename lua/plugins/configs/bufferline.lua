@@ -34,13 +34,17 @@ require('bufferline').setup{
         tab_selected = {
             bg = mocha.text,
         },
+        -- inactive buffers
         background = {
-            -- bg = mocha.mantle,
             bg = mocha.mantle,
-            fg = '#757575',
+            fg = mocha.subtext0,
         },
         close_button = {
             bg = mocha.mantle,
+            fg = mocha.subtext0,
         },
+        close_button_selected = {
+            fg = mocha.red,
+        }
     },
 }

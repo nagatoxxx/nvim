@@ -46,6 +46,7 @@ end, {silent = true})
 -- Telescope
 map('n', '<leader>fb', ':Telescope buffers<CR>', {})
 map('n', '<leader>fd', ':Telescope diagnostics<CR>', {})
+map('n', '<leader>ff', ':Telescope fd<CR>', {})
 
 -- ToggleTerm
 map('n', '<F1>', ':ToggleTerm<CR>', {})
