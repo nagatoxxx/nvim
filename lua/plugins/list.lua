@@ -166,4 +166,14 @@ return {
             return require('plugins.configs.gitsigns')
         end,
     },
+    
+    {
+        'akinsho/toggleterm.nvim',
+        opts = {
+            open_mapping = [[<C- >]],
+            -- winbar = {
+            --     enabled = false,
+            -- }
+        }
+    },
 }

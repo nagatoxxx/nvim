@@ -42,3 +42,10 @@ set({"i", "s"}, "<C-E>", function()
 		ls.change_choice(1)
 	end
 end, {silent = true})
+
+-- Telescope
+map('n', '<leader>fb', ':Telescope buffers<CR>', {})
+map('n', '<leader>fd', ':Telescope diagnostics<CR>', {})
+
+-- ToggleTerm
+map('n', '<F1>', ':ToggleTerm<CR>', {})

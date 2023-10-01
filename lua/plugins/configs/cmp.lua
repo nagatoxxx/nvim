@@ -56,7 +56,7 @@ cmp.setup({
         documentation = cmp.config.window.bordered {
             -- border = border "CmpDocBorder",
             border = {'┌', '─', '┐', '│', '┘', '─', '└', '│'},
-            winhighlight = "Search:PmenuSel,Normal:CmpDoc",
+            winhighlight = "Search:PmenuSel,Normal:CmpDoc,FloatBorder:CmpMenu",
             side_padding = 1,
         }
     },
