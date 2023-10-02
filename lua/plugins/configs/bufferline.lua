@@ -25,7 +25,7 @@ require('bufferline').setup{
         },
         indicator_selected = {
             bg = mocha.base,
-            fg = mocha.teal,
+            fg = mocha.peach,
         },
         separator = {
             bg = mocha.mantle,
@@ -45,6 +45,22 @@ require('bufferline').setup{
         },
         close_button_selected = {
             fg = mocha.red,
-        }
+        },
+        error = {
+            bg = mocha.mantle,
+            fg = mocha.red,
+        },
+        error_diagnostic = {
+            bg = mocha.mantle,
+            fg = mocha.red
+        },
+        warning = {
+            bg = mocha.mantle,
+            fg = mocha.yellow,
+        },
+        warning_diagnostic = {
+            bg = mocha.mantle,
+            fg = mocha.yellow
+        },
     },
 }
