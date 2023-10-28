@@ -1,13 +1,13 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
-augroup('ClangFormat', { clear = true })
-autocmd('Filetype', {
-    group = 'ClangFormat',
-    pattern = { 'cpp', 'c', 'h', 'hpp' },
-    command = 'ClangFormatAutoEnable'
-})
-
+-- augroup('ClangFormat', { clear = true })
+-- autocmd('Filetype', {
+--     group = 'ClangFormat',
+--     pattern = { 'cpp', 'c', 'h', 'hpp' },
+--     command = 'ClangFormatAutoEnable'
+-- })
+--
 vim.api.nvim_create_autocmd("BufEnter", {
   nested = true,
   callback = function()
@@ -16,3 +16,4 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
   end
 })
+

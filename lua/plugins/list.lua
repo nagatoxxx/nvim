@@ -7,6 +7,7 @@ return {
 
     {
         'numToStr/Comment.nvim',
+        event = { "BufReadPost", "BufNewFile" },
         opts = {
         },
     },
@@ -64,11 +65,13 @@ return {
 
     {
         'williamboman/mason.nvim',
-        opts = {}
+        opts = {
+        },
     },
 
     {
         'neovim/nvim-lspconfig',
+        ft = {'tex', 'py', 'cpp', 'c', 'h', 'hpp', 'txt', 'lua'},
         config = function()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
             require('lspconfig')['clangd'].setup{
@@ -90,12 +93,20 @@ return {
             require('lspconfig')['lua_ls'].setup{
                 capabilities = capabilities,
             }
+            require('lspconfig')['texlab'].setup{
+                capabilities = capabilities,
+            }
+            require('lspconfig')['cssls'].setup{
+                capabilities = capabilities,
+            }
         end,
     },
 
     {
         'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
+        -- event = 'InsertEnter',
+        ft = {'tex', 'py', 'cpp', 'c', 'h', 'hpp', 'txt', 'lua'},
+        event = {'InsertEnter', 'CmdlineEnter'},
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
@@ -112,10 +123,6 @@ return {
     {
         'nvim-treesitter/nvim-treesitter',
         opts = {}
-    },
-
-    {
-        'rhysd/vim-clang-format'
     },
 
     {
@@ -157,7 +164,10 @@ return {
 
     {
         'nvim-telescope/telescope.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' },
+        -- lazy = true,
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
         opts = function()
             return require('plugins.configs.telescope')
         end,
@@ -174,16 +184,61 @@ return {
         'akinsho/toggleterm.nvim',
         opts = {
             open_mapping = [[<C- >]],
-            -- winbar = {
-            --     enabled = false,
-            -- }
         }
     },
 
     {
         'williamboman/mason-lspconfig.nvim',
+        -- lazy = true,
         opts = {
-            ensure_installed = {'clangd', 'pyright', 'lua_ls'}
+            ensure_installed = {
+                'clangd',
+                -- 'clang-format',
+                'pyright',
+                'lua_ls',
+                'texlab',
+                -- 'codelldb'
+            }
         }
-    }
+    },
+
+    {
+        'lervag/vimtex',
+        ft = {"tex"},
+        config = function ()
+            vim.g.vimtex_view_method = 'zathura'
+            vim.g.vimtex_compiler_method = 'latexmk'
+        end,
+    },
+
+    {
+        'anuvyklack/pretty-fold.nvim',
+        config = function ()
+            require('pretty-fold').setup({
+                keep_intendation = true,
+            })
+        end
+    },
+
+    {
+        'jose-elias-alvarez/null-ls.nvim',
+        -- event = 'VeryLazy',
+        opts = function()
+            return require('plugins.configs.null-ls')
+        end,
+    },
+
+    {
+        'jay-babu/mason-nvim-dap.nvim',
+        event = 'VeryLazy',
+        dependencies = {
+            'williamboman/mason.nvim',
+            'mfussenegger/nvim-dap'
+        },
+        opts = {
+            handlers = {
+
+            },
+        },
+    },
 }

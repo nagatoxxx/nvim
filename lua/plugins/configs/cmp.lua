@@ -1,5 +1,10 @@
 local cmp = require('cmp')
 
+local colors = require("catppuccin.palettes").get_palette "mocha"
+
+vim.api.nvim_set_hl(0, "Border", {fg = colors.surface2})
+vim.api.nvim_set_hl(0, "Background", {bg = colors.base, fg = colors.text})
+
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -19,48 +24,35 @@ cmp.setup({
         }),
     },
     sources = {
-        { 
+        {
             name = 'luasnip',
             option = {
                 show_autosnippets = true,
             },
             max_item_count = 4,
         },
-        { 
-            name = 'nvim_lsp', 
+        {
+            name = 'nvim_lsp',
             max_item_count = 8,
         },
         { name = 'nvim_lsp_signature_help'},
-        { name = 'buffer'}, 
+        { name = 'buffer'},
         { name = 'path' },
     },
     window = {
         completion = cmp.config.window.bordered {
             border = {'┌', '─', '┐', '│', '┘', '─', '└', '│'},
-            -- border = border "CmpMenuBorder",
             col_offset = -1,
-            side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
-            winhighlight = "Normal:CmpMenu,FloatBorder:CmpMenu,CursorLine:IncSearch",
+            winhighlight = "CursorLine:IncSearch,Normal:Background,FloatBorder:Border",
             scrollbar = false,
         },
         documentation = cmp.config.window.bordered {
-            -- border = border "CmpDocBorder",
             border = {'┌', '─', '┐', '│', '┘', '─', '└', '│'},
-            winhighlight = "Search:PmenuSel,Normal:CmpDoc,FloatBorder:CmpMenu",
+            winhighlight = "Search:PmenuSel,Normal:Background,FloatBorder:Border",
             side_padding = 1,
         }
     },
     formatting = {
         fields = {'abbr', 'kind'},
-        format = function(entry, item)
-            local menu_icon = {
-                nvim_lsp = 'λ ',
-                luasnip = ' ',
-                buffer = 'Ω ',
-                path = ' ',
-            }
-            item.menu = menu_icon[entry.source.name]
-            return item
-        end,
     },
 })

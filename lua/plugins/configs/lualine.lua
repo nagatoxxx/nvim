@@ -9,20 +9,23 @@
 
 local lualine = require('lualine')
 
--- Color table for highlights
--- stylua: ignore
+-- TODO integrate a catppuccin palette
+local palette = require("catppuccin.palettes").get_palette "mocha"
+
+
 local colors = {
-  bg       = '#111111',
+  bg       = '#ffffff',
   fg       = '#ffffff',
-  yellow   = '#ECBE7B',
-  cyan     = '#008080',
+  yellow   = '#f9e2af',
+  cyan     = '#94e2d5',
   darkblue = '#081633',
-  green    = '#B7BD82',
-  orange   = '#8d6141',
-  violet   = '#B294BB',
-  magenta  = '#AE84BB',
+  green    = '#a6e3a1',
+  orange   = '#fab387',
+  violet   = '#cba6f7',
+  magenta  = '#b4befe',
   blue     = '#96CDFB',
-  red      = '#CC8282',
+  red      = '#f38ba8',
+  black    = '#11111b',
 }
 
 local conditions = {
@@ -41,15 +44,21 @@ local conditions = {
 
 -- Config
 local config = {
-  options = {
-    -- Disable sections and component separators
-    component_separators = '',
-    section_separators = '',
-    theme = 'catppuccin',
-},
-  extensions = {'nvim-tree', 'lazy'},
+    options = {
+        -- Disable sections and component separators
+        component_separators = '',
+        section_separators = '',
+        -- theme = 'catppuccin',
+        disabled_filetypes = {
+            "dapui_watches", "dapui_breakpoints",
+            "dapui_scopes", "dapui_console",
+            "dapui_stacks", "dap-repl",
+            "toggleterm"
+        },
+    },
 
--- These are to remove the defaults
+extensions = {'nvim-tree', 'lazy', 'mason'},
+
   sections = {
     lualine_a = {},
     lualine_b = {},
@@ -80,14 +89,13 @@ local function ins_right(component)
   table.insert(config.sections.lualine_x, component)
 end
 
--- Icon Of Diffrent Mode: -- normal -- | -- insert -- | -- visual --
 ins_left {
   -- mode component
   function()
-    return ' ' end,
-  color = function()
+    return vim.fn.mode() 
+  end,
 
--- auto change color according to neovims mode
+  color = function()
     local mode_color = {
       n = colors.green,
       i = colors.blue,
@@ -110,7 +118,7 @@ ins_left {
       ['!'] = colors.red,
       t = colors.red,
     }
-    return { fg = mode_color[vim.fn.mode()] }
+    return { fg = colors.black, bg = mode_color[vim.fn.mode()] }
   end,
   padding = 1,
 }
@@ -122,11 +130,12 @@ ins_left {
     path = 0,                                       -- 0: Just the filename
     shorting_target = 100,                             -- Shortens path to leave 40 spaces in the window
     symbols = {
-        modified = '[unsaved changes]', 
-        readonly = '[readonly]',                        
+        modified = '[unsaved changes]',
+        readonly = '[readonly]',
         unnamed = '[no name]',                           -- Text to show for unnamed buffers.
     },
-    padding = 1
+    padding = 1,
+    -- color = {fg = colors.blue},
 }
 
 -- Git Diff
@@ -163,15 +172,6 @@ ins_right {
 
 -- File Encoding
 ins_right {
-  'o:encoding', -- option component same as &encoding in viml
-  -- fmt = string.lower, -- I'm not sure why it's upper case either ;)
-  cond = conditions.hide_in_width,
-  padding = 1,
-  -- color = { fg = colors.green, gui = 'bold' },
-  -- Add components to right sections
-}
-
-ins_right {
     'diagnostics',
     source = {'nvim_diagnostics'},
     padding = 1,
@@ -181,6 +181,7 @@ ins_right {
 ins_right {
   'location',
   padding = 1,
+  color = {fg = colors.black, bg = colors.magenta},
 }
 
 ins_left {
@@ -191,3 +192,4 @@ ins_left {
 
 lualine.setup(config)
 
+vim.api.nvim_set_hl(0, "StatusLineNC", {bg = colors.fg, fg = colors.cyan})

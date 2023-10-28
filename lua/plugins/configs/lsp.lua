@@ -1,3 +1,9 @@
+vim.cmd([[
+set signcolumn=yes
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]])
+
+
 local sign = function(opts)
   vim.fn.sign_define(opts.name, {
     texthl = opts.name,
@@ -6,36 +12,30 @@ local sign = function(opts)
   })
 end
 
--- sign({name = 'DiagnosticSignError', text = ''})
--- sign({name = 'DiagnosticSignWarn', text = ''})
--- sign({name = 'DiagnosticSignHint', text = ''})
--- sign({name = 'DiagnosticSignInfo', text = ''})
+-- sign({name = 'DiagnosticSignError', text = ' '})
+-- sign({name = 'DiagnosticSignWarn', text = ' '})
+-- sign({name = 'DiagnosticSignHint', text = ' '})
+-- sign({name = 'DiagnosticSignInfo', text = ' '})
 
 sign({name = 'DiagnosticSignError', text = '!'})
 sign({name = 'DiagnosticSignWarn', text = '~'})
-sign({name = 'DiagnosticSignHint', text = '*'})
-sign({name = 'DiagnosticSignInfo', text = '*'})
+sign({name = 'DiagnosticSignHint', text = 'h'})
+sign({name = 'DiagnosticSignInfo', text = 'i'})
+
 
 vim.diagnostic.config({
     virtual_text = {
         prefix = '■ ', -- Could be '■', '▎', 'x'
     },
-    virtual_text = false,
     signs = true,
-    update_in_insert = false,
+    -- update_in_insert = false,
     underline = true,
-    severity_sort = false,
+    -- severity_sort = false,
     float = {
-        border = 'rounded',
-        source = 'always',
+        border = {'┌', '─', '┐', '│', '┘', '─', '└', '│'},
+    --     source = 'always',
         header = '',
         prefix = '',
     },
 })
-
-vim.cmd([[
-set signcolumn=yes
-autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
-]])
-
 
