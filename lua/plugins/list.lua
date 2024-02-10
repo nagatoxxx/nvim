@@ -6,10 +6,9 @@ return {
     },
 
     {
-        'numToStr/Comment.nvim',
+       'numToStr/Comment.nvim',
         event = { "BufReadPost", "BufNewFile" },
-        opts = {
-        },
+        opts = {},
     },
 
     {
@@ -29,16 +28,10 @@ return {
     },
 
     {
-        'akinsho/bufferline.nvim',
-        version = "*",
-        dependencies = 'nvim-tree/nvim-web-devicons',
-        config = function()
-            require('plugins.configs.bufferline')
-        end,
-    },
-
-    {
         'nvim-tree/nvim-tree.lua',
+        dependencies = {
+            'nvim-tree/nvim-web-devicons'
+        },
         opts = {
             filters = {
                 dotfiles = true,
@@ -66,6 +59,11 @@ return {
     {
         'williamboman/mason.nvim',
         opts = {
+            ensure_installed = {
+                'codelldb',
+                'clangd',
+                'clang-format'
+            }
         },
     },
 
@@ -83,6 +81,11 @@ return {
                     "--background-index",
                     "--pch-storage=memory",
                 },
+                on_attach = function(client, bufnr)
+                    if client.server_capabilities.inlayHintProvider then
+                        vim.lsp.inlay_hint.enable(bufnr, true)
+                    end
+                end
             }
             require('lspconfig')['cmake'].setup{
                 capabilities = capabilities,
@@ -92,6 +95,13 @@ return {
             }
             require('lspconfig')['lua_ls'].setup{
                 capabilities = capabilities,
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = {'vim'}
+                        }
+                    }
+                }
             }
             require('lspconfig')['texlab'].setup{
                 capabilities = capabilities,
@@ -99,12 +109,14 @@ return {
             require('lspconfig')['cssls'].setup{
                 capabilities = capabilities,
             }
+            require('lspconfig')['asm_lsp'].setup{
+                capabilities = capabilities,
+            }
         end,
     },
 
     {
         'hrsh7th/nvim-cmp',
-        -- event = 'InsertEnter',
         ft = {'tex', 'py', 'cpp', 'c', 'h', 'hpp', 'txt', 'lua'},
         event = {'InsertEnter', 'CmdlineEnter'},
         dependencies = {
@@ -122,7 +134,9 @@ return {
 
     {
         'nvim-treesitter/nvim-treesitter',
-        opts = {}
+        opts = {
+            ensure_installed = { "c", "lua", "vim", "vimdoc", "cpp" },
+        }
     },
 
     {
@@ -142,6 +156,11 @@ return {
                 char = '│',
             },
             scope = {enabled = false},
+            exclude = {
+                filetypes = {
+                    'dashboard'
+                }
+            }
         }
     },
 
@@ -163,41 +182,17 @@ return {
     },
 
     {
-        'nvim-telescope/telescope.nvim',
-        -- lazy = true,
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-        },
-        opts = function()
-            return require('plugins.configs.telescope')
-        end,
-    },
-
-    {
-        'lewis6991/gitsigns.nvim',
-        opts = function()
-            return require('plugins.configs.gitsigns')
-        end,
-    },
-    
-    {
-        'akinsho/toggleterm.nvim',
-        opts = {
-            open_mapping = [[<C- >]],
-        }
+        'nvim-lua/plenary.nvim',
     },
 
     {
         'williamboman/mason-lspconfig.nvim',
-        -- lazy = true,
         opts = {
             ensure_installed = {
                 'clangd',
-                -- 'clang-format',
                 'pyright',
                 'lua_ls',
                 'texlab',
-                -- 'codelldb'
             }
         }
     },
@@ -212,15 +207,6 @@ return {
     },
 
     {
-        'anuvyklack/pretty-fold.nvim',
-        config = function ()
-            require('pretty-fold').setup({
-                keep_intendation = true,
-            })
-        end
-    },
-
-    {
         'jose-elias-alvarez/null-ls.nvim',
         -- event = 'VeryLazy',
         opts = function()
@@ -229,16 +215,61 @@ return {
     },
 
     {
-        'jay-babu/mason-nvim-dap.nvim',
+        'smoka7/hop.nvim',
+        opts = {},
+    },
+
+    {
+        'famiu/bufdelete.nvim',
+    },
+
+    {
+        'simrat39/symbols-outline.nvim',
+        opts = {
+            relative_width = true,
+            auto_close = true
+        }
+    },
+
+    {
+        'akinsho/toggleterm.nvim',
+        opts = {
+            open_mapping = [[<C- >]],
+        }
+    },
+
+    {
+        'crispgm/nvim-tabline',
+        dependencies = { 'nvim-tree/nvim-web-devicons' }, -- optional
+        opts = {
+            show_index = false,
+            brackets = { '', '' },
+            no_name = 'no name',
+        }
+    },
+
+    {
+        'utilyre/barbecue.nvim',
+        name = 'barbeque',
         event = 'VeryLazy',
         dependencies = {
-            'williamboman/mason.nvim',
-            'mfussenegger/nvim-dap'
+            'SmiteshP/nvim-navic',
+            'nvim-tree/nvim-web-devicons',
         },
         opts = {
-            handlers = {
 
-            },
-        },
+        }
     },
+
+    {
+        'eriks47/generate.nvim',
+        opts = {}
+    },
+
+    {
+        'Exafunction/codeium.nvim',
+        opts = {
+
+        }
+    }
 }

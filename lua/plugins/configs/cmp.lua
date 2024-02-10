@@ -1,10 +1,5 @@
 local cmp = require('cmp')
 
-local colors = require("catppuccin.palettes").get_palette "mocha"
-
-vim.api.nvim_set_hl(0, "Border", {fg = colors.surface2})
-vim.api.nvim_set_hl(0, "Background", {bg = colors.base, fg = colors.text})
-
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -36,15 +31,19 @@ cmp.setup({
             max_item_count = 8,
         },
         { name = 'nvim_lsp_signature_help'},
-        { name = 'buffer'},
+        -- { name = 'buffer'},
         { name = 'path' },
+        {
+            name = 'codeium',
+            priority = 100
+        }
     },
     window = {
         completion = cmp.config.window.bordered {
             border = {'┌', '─', '┐', '│', '┘', '─', '└', '│'},
             col_offset = -1,
             winhighlight = "CursorLine:IncSearch,Normal:Background,FloatBorder:Border",
-            scrollbar = false,
+            scrollbar = true,
         },
         documentation = cmp.config.window.bordered {
             border = {'┌', '─', '┐', '│', '┘', '─', '└', '│'},
@@ -55,4 +54,9 @@ cmp.setup({
     formatting = {
         fields = {'abbr', 'kind'},
     },
+    sorting = {
+        comparators = {
+            -- cmp.config.compare.recently_used
+        }
+    }
 })
