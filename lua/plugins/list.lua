@@ -1,12 +1,12 @@
 return {
     {
         'windwp/nvim-autopairs',
-         event = "InsertEnter",
-         opts = {}
+        event = "InsertEnter",
+        opts = {}
     },
 
     {
-       'numToStr/Comment.nvim',
+        'numToStr/Comment.nvim',
         event = { "BufReadPost", "BufNewFile" },
         opts = {},
     },
@@ -59,21 +59,15 @@ return {
     {
         'williamboman/mason.nvim',
         version = "^1.0.0",
-        opts = {
-            ensure_installed = {
-                'codelldb',
-                'clangd',
-                'clang-format'
-            }
-        },
+        opts = {},
     },
 
     {
         'neovim/nvim-lspconfig',
-        ft = {'tex', 'py', 'cpp', 'c', 'h', 'hpp', 'txt', 'lua'},
+        ft = { 'tex', 'py', 'cpp', 'c', 'h', 'hpp', 'txt', 'lua' },
         config = function()
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            require('lspconfig')['clangd'].setup{
+            require('lspconfig')['clangd'].setup {
                 capabilities = capabilities,
                 cmd = {
                     "clangd",
@@ -88,42 +82,32 @@ return {
                     end
                 end
             }
-            require('lspconfig')['cmake'].setup{
+            require('lspconfig')['cmake'].setup {
                 capabilities = capabilities,
             }
-            require('lspconfig')['html'].setup{
-                filetypes = {'html'},
+            require('lspconfig')['pyright'].setup {
                 capabilities = capabilities,
             }
-            require('lspconfig')['pyright'].setup{
+            require('lspconfig')['hls'].setup {
                 capabilities = capabilities,
-            }
-            require('lspconfig')['jinja_lsp'].setup{
-                capabilities = capabilities,
-            }
-            require('lspconfig')['hls'].setup{
-                capabilities = capabilities,
-                filetypes = {'haskell', 'lhaskell', 'cabal'},
+                filetypes = { 'haskell', 'lhaskell', 'cabal' },
                 cmd = { "haskell-language-server-wrapper", "--lsp" }
             }
-            require('lspconfig')['gopls'].setup{
+            require('lspconfig')['gopls'].setup {
                 capabilities = capabilities,
-                filetypes = {'go'},
+                filetypes = { 'go' },
             }
-            -- require('lspconfig')['goimports'].setup{
-            --     capabilities = capabilities,
-            -- }
-            require('lspconfig')['lua_ls'].setup{
+            require('lspconfig')['lua_ls'].setup {
                 capabilities = capabilities,
                 settings = {
                     Lua = {
                         diagnostics = {
-                            globals = {'vim'}
+                            globals = { 'vim' }
                         }
                     }
                 }
             }
-            require('lspconfig')['texlab'].setup{
+            require('lspconfig')['texlab'].setup {
                 capabilities = capabilities,
             }
         end,
@@ -131,8 +115,8 @@ return {
 
     {
         'hrsh7th/nvim-cmp',
-        ft = {'tex', 'py', 'cpp', 'c', 'h', 'hpp', 'txt', 'lua'},
-        event = {'InsertEnter', 'CmdlineEnter'},
+        ft = { 'tex', 'py', 'cpp', 'c', 'h', 'hpp', 'txt', 'lua' },
+        event = { 'InsertEnter', 'CmdlineEnter' },
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
@@ -204,38 +188,33 @@ return {
 
     {
         'williamboman/mason-lspconfig.nvim',
-        version = "^1.0.0",       
+        version = "^1.0.0",
         opts = {
             ensure_installed = {
                 'clangd',
                 'pyright',
                 'lua_ls',
                 'texlab',
+                'cmake',
+                'gopls'
             }
         }
     },
 
     {
         'lervag/vimtex',
-        ft = {"tex"},
-        config = function ()
+        ft = { "tex" },
+        config = function()
             vim.g.vimtex_view_method = 'zathura'
             vim.g.vimtex_compiler_method = 'latexmk'
         end,
     },
 
-    -- {
-    --     'jose-elias-alvarez/null-ls.nvim',
-    --     opts = function()
-    --         return require('plugins.configs.null-ls')
-    --     end,
-    -- },
-
     {
         'stevearc/conform.nvim',
         opts = {
             formatters_by_ft = {
-                cpp = {"clang-format"}
+                cpp = { "clang-format" }
             },
             format_on_save = {
                 -- These options will be passed to conform.format()
@@ -270,7 +249,7 @@ return {
         'crispgm/nvim-tabline',
         dependencies = { 'nvim-tree/nvim-web-devicons' }, -- optional
         opts = {
-            show_index = false,
+            show_index = true,
             brackets = { '', '' },
             no_name = 'no name',
         }
@@ -279,7 +258,7 @@ return {
     {
         'lewis6991/gitsigns.nvim',
         opts = {
-            signs = {
+            signs                        = {
                 add          = { text = '┃' },
                 change       = { text = '┃' },
                 delete       = { text = '_' },
@@ -287,17 +266,17 @@ return {
                 changedelete = { text = '~' },
                 untracked    = { text = '┇' },
             },
-            signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
-            numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
-            linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
-            word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
-            watch_gitdir = {
+            signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
+            numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
+            linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
+            word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
+            watch_gitdir                 = {
                 follow_files = true
             },
-            auto_attach = true,
-            attach_to_untracked = false,
-            current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-            current_line_blame_opts = {
+            auto_attach                  = true,
+            attach_to_untracked          = false,
+            current_line_blame           = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+            current_line_blame_opts      = {
                 virt_text = true,
                 virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
                 delay = 1000,
@@ -305,11 +284,11 @@ return {
                 virt_text_priority = 100,
             },
             current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-            sign_priority = 6,
-            update_debounce = 100,
-            status_formatter = nil, -- Use default
-            max_file_length = 40000, -- Disable if file is longer than this (in lines)
-            preview_config = {
+            sign_priority                = 6,
+            update_debounce              = 100,
+            status_formatter             = nil,   -- Use default
+            max_file_length              = 40000, -- Disable if file is longer than this (in lines)
+            preview_config               = {
                 border = 'single',
                 style = 'minimal',
                 relative = 'cursor',
@@ -339,7 +318,7 @@ return {
     },
 
     {
-    "folke/todo-comments.nvim",
+        "folke/todo-comments.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {
         }
@@ -400,18 +379,18 @@ return {
         opts = function()
             local options = {
                 preview = {
-                    quit = "q", -- optional keymapping for quit preview
-                    accept = "<tab>", -- optional keymapping for accept preview
+                    quit = "q",                           -- optional keymapping for quit preview
+                    accept = "<tab>",                     -- optional keymapping for accept preview
                 },
-                header_extension = "h", -- optional
-                source_extension = "cpp", -- optional
+                header_extension = "h",                   -- optional
+                source_extension = "cpp",                 -- optional
                 custom_define_class_function_commands = { -- optional
                     TSCppImplWrite = {
                         output_handle = require("nt-cpp-tools.output_handlers").get_add_to_cpp(),
                     },
                     --[[
                     <your impl function custom command name> = {
-                        output_handle = function (str, context) 
+                        output_handle = function (str, context)
                             -- string contains the class implementation
                             -- do whatever you want to do with it
                         end
@@ -441,4 +420,10 @@ return {
             }
         }
     },
+
+    {
+        "chentoast/marks.nvim",
+        event = "VeryLazy",
+        opts = {},
+    }
 }
