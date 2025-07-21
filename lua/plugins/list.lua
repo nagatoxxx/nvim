@@ -72,6 +72,11 @@ return {
                 cmd = {
                     "clangd",
                     "-j=8",
+                    "--clang-tidy",
+                    "--clang-tidy-checks=*",
+                    "--all-scopes-completion",
+                    "--cross-file-rename",
+                    "--header-insertion-decorators",
                     "--malloc-trim",
                     "--background-index",
                     "--pch-storage=memory",
