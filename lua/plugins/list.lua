@@ -66,9 +66,7 @@ return {
         'neovim/nvim-lspconfig',
         ft = { 'tex', 'py', 'cpp', 'c', 'h', 'hpp', 'txt', 'lua' },
         config = function()
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            require('lspconfig')['clangd'].setup {
-                capabilities = capabilities,
+            vim.lsp.config('clangd', {
                 cmd = {
                     "clangd",
                     "-j=8",
@@ -86,35 +84,13 @@ return {
                         vim.lsp.inlay_hint.enable(true)
                     end
                 end
-            }
-            require('lspconfig')['cmake'].setup {
-                capabilities = capabilities,
-            }
-            require('lspconfig')['pyright'].setup {
-                capabilities = capabilities,
-            }
-            require('lspconfig')['hls'].setup {
+            })
+            vim.lsp.config('hls', {
                 capabilities = capabilities,
                 filetypes = { 'haskell', 'lhaskell', 'cabal' },
                 cmd = { "haskell-language-server-wrapper", "--lsp" }
-            }
-            require('lspconfig')['gopls'].setup {
-                capabilities = capabilities,
-                filetypes = { 'go' },
-            }
-            require('lspconfig')['lua_ls'].setup {
-                capabilities = capabilities,
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = { 'vim' }
-                        }
-                    }
-                }
-            }
-            require('lspconfig')['texlab'].setup {
-                capabilities = capabilities,
-            }
+            })
+            vim.lsp.enable({ 'clangd', 'cmake', 'pyright', 'hls', 'gopls', 'lua_ls', 'lspconfig' })
         end,
     },
 
@@ -254,7 +230,7 @@ return {
         'crispgm/nvim-tabline',
         dependencies = { 'nvim-tree/nvim-web-devicons' }, -- optional
         opts = {
-            show_index = true,
+            show_index = false,
             brackets = { '', '' },
             no_name = 'no name',
         }
@@ -413,17 +389,6 @@ return {
         "winston0410/range-highlight.nvim",
         event = { "CmdlineEnter" },
         opts = {},
-    },
-
-    {
-        "potamides/pantran.nvim",
-        opts = {
-            default_engine = "google",
-            engines = {
-                default_source = "ru",
-                default_target = "en"
-            }
-        }
     },
 
     {
