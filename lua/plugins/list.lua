@@ -220,13 +220,6 @@ return {
     },
 
     {
-        'akinsho/toggleterm.nvim',
-        opts = {
-            open_mapping = [[<C- >]],
-        }
-    },
-
-    {
         'crispgm/nvim-tabline',
         dependencies = { 'nvim-tree/nvim-web-devicons' }, -- optional
         opts = {
