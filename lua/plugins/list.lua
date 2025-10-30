@@ -90,7 +90,7 @@ return {
                 filetypes = { 'haskell', 'lhaskell', 'cabal' },
                 cmd = { "haskell-language-server-wrapper", "--lsp" }
             })
-            vim.lsp.enable({ 'clangd', 'cmake', 'pyright', 'hls', 'gopls', 'lua_ls', 'lspconfig' })
+            vim.lsp.enable({ 'clangd', 'cmake', 'qmlls' })
         end,
     },
 
@@ -118,13 +118,13 @@ return {
         }
     },
 
-    {
-        'norcalli/nvim-colorizer.lua',
-        config = function()
-            vim.opt.termguicolors = true
-            require('colorizer').setup()
-        end,
-    },
+    -- {
+    --     'norcalli/nvim-colorizer.lua',
+    --     config = function()
+    --         vim.opt.termguicolors = true
+    --         require('colorizer').setup()
+    --     end,
+    -- },
 
     {
         'lukas-reineke/indent-blankline.nvim',
@@ -388,5 +388,26 @@ return {
         "chentoast/marks.nvim",
         event = "VeryLazy",
         opts = {},
+    },
+
+    {
+        'VidocqH/lsp-lens.nvim',
+        opts = {
+            enable = true,
+              include_declaration = false,      -- Reference include declaration
+              sections = {                      -- Enable / Disable specific request, formatter example looks 'Format Requests'
+                definition = false,
+                references = true,
+                implements = true,
+                git_authors = false,
+              },
+              ignore_filetype = {
+                "prisma",
+              },
+              -- Target Symbol Kinds to show lens information
+              -- target_symbol_kinds = { SymbolKind.Function, SymbolKind.Method, SymbolKind.Interface },
+              -- Symbol Kinds that may have target symbol kinds as children
+              -- wrapper_symbol_kinds = { SymbolKind.Class, SymbolKind.Struct },
+        }
     }
 }
