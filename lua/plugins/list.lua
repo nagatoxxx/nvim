@@ -409,5 +409,11 @@ return {
               -- Symbol Kinds that may have target symbol kinds as children
               -- wrapper_symbol_kinds = { SymbolKind.Class, SymbolKind.Struct },
         }
+    },
+
+    {
+        'APZelos/blamer.nvim',
+        config = function()
+        end,
     }
 }
