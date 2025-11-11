@@ -118,14 +118,6 @@ return {
         }
     },
 
-    -- {
-    --     'norcalli/nvim-colorizer.lua',
-    --     config = function()
-    --         vim.opt.termguicolors = true
-    --         require('colorizer').setup()
-    --     end,
-    -- },
-
     {
         'lukas-reineke/indent-blankline.nvim',
         main = 'ibl',
@@ -165,6 +157,8 @@ return {
 
     {
         'nvim-lua/plenary.nvim',
+        config = function()
+        end,
     },
 
     {
@@ -173,11 +167,11 @@ return {
         opts = {
             ensure_installed = {
                 'clangd',
-                'pyright',
                 'lua_ls',
-                'texlab',
                 'cmake',
-                'gopls'
+                -- 'texlab',
+                -- 'gopls'
+                -- 'pyright',
             }
         }
     },
@@ -198,7 +192,6 @@ return {
                 cpp = { "clang-format" }
             },
             format_on_save = {
-                -- These options will be passed to conform.format()
                 timeout_ms = 500,
                 lsp_format = "fallback",
             },
@@ -249,10 +242,10 @@ return {
             },
             auto_attach                  = true,
             attach_to_untracked          = false,
-            current_line_blame           = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+            current_line_blame           = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
             current_line_blame_opts      = {
                 virt_text = true,
-                virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+                virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
                 delay = 1000,
                 ignore_whitespace = false,
                 virt_text_priority = 100,
@@ -336,15 +329,6 @@ return {
 
         },
     },
-    {
-        'MeanderingProgrammer/render-markdown.nvim',
-        dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
-        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-        -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-        ---@module 'render-markdown'
-        ---@type render.md.UserConfig
-        opts = {},
-    },
 
     {
         "Badhi/nvim-treesitter-cpp-tools",
@@ -379,12 +363,6 @@ return {
     },
 
     {
-        "winston0410/range-highlight.nvim",
-        event = { "CmdlineEnter" },
-        opts = {},
-    },
-
-    {
         "chentoast/marks.nvim",
         event = "VeryLazy",
         opts = {},
@@ -404,16 +382,6 @@ return {
               ignore_filetype = {
                 "prisma",
               },
-              -- Target Symbol Kinds to show lens information
-              -- target_symbol_kinds = { SymbolKind.Function, SymbolKind.Method, SymbolKind.Interface },
-              -- Symbol Kinds that may have target symbol kinds as children
-              -- wrapper_symbol_kinds = { SymbolKind.Class, SymbolKind.Struct },
         }
     },
-
-    {
-        'APZelos/blamer.nvim',
-        config = function()
-        end,
-    }
 }

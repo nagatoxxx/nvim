@@ -39,7 +39,7 @@ end, { silent = true })
 -- Telescope
 map('n', '<leader>fb', ':Telescope buffers<CR>', { silent = true })
 map('n', '<leader>fd', ':Telescope diagnostics<CR>', { silent = true })
-map('n', '<leader>ff', ':Telescope fd<CR>', { silent = true })
+map('n', '<leader>fu', ':lua require("telescope.builtin").lsp_references()<CR>', { noremap = true, silent = true })
 
 -- Hop
 map('n', '<leader>w', ':HopWord<CR>', { silent = true })
