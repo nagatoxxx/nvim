@@ -272,15 +272,16 @@ return {
 
     {
         'nvim-telescope/telescope.nvim',
+        dependencies = { 'BurntSushi/ripgrep' },
         opts = {
-            pickers = {
-                buffers = {
-                    initial_mode = 'normal'
-                },
-                diagnostics = {
-                    initial_mode = 'normal'
-                }
-            }
+            -- pickers = {
+            --     buffers = {
+            --         initial_mode = 'normal'
+            --     },
+            --     diagnostics = {
+            --         initial_mode = 'normal'
+            --     }
+            -- }
         }
     },
 

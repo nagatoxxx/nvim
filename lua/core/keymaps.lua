@@ -2,28 +2,19 @@ local map = vim.api.nvim_set_keymap
 local set = vim.keymap.set
 
 -- Base
-map('n', '<leader>tn', ':tabnew<CR>', { silent = true })
-map('n', '<leader>|', ':vsplit<CR>', { silent = true })
-map('n', '<leader>-', ':split<CR>', { silent = true })
-map('n', '<leader>qq', ':q<CR>', { silent = true })
-
--- Text bindings
-map('i', '<S-Space>', '_', { silent = true }) -- underscore on Shift+Space
-
--- System clipboard
-map('v', '<C-c>', '"+y', { silent = true })
-map('v', '<C-x>', '"+c', { silent = true })
-map('v', '<C-v>', 'c<Esc>"+p', { silent = true })
-map('i', '<C-v>', '<C-r><C-o>+', { silent = true })
+map('n', '<leader>tn', ':tabnew<CR>', { silent = true, desc = 'open new tab' })
+map('n', '<leader>|', ':vsplit<CR>', { silent = true, desc = 'split verically' })
+map('n', '<leader>-', ':split<CR>', { silent = true, desc = 'split horizontally' })
+map('n', '<leader>qq', ':q<CR>', { silent = true, desc = 'close buffer' })
 
 -- LSP
-map('n', '<leader>rr', ':lua vim.lsp.buf.rename()<CR>', { silent = true })
-map('n', '<leader>dd', ':lua vim.lsp.buf.definition()<CR>', { silent = true })
-map('n', '<leader>di', ':lua vim.lsp.buf.implementation()<CR>', { silent = true })
-map('n', '<leader>dg', ':lua vim.diagnostic.open_float(nil, { focusable = false })<CR>', { silent = true })
+map('n', '<leader>rr', ':lua vim.lsp.buf.rename()<CR>', { silent = true, desc = 'LSP rename symbol' })
+map('n', '<leader>dd', ':lua vim.lsp.buf.definition()<CR>', { silent = true, desc = 'go to definition' })
+map('n', '<leader>di', ':lua vim.lsp.buf.implementation()<CR>', { silent = true, desc = 'go to implementation' })
+map('n', '<leader>dg', ':lua vim.diagnostic.open_float(nil, { focusable = false })<CR>', { silent = true, desc = 'LSP diagnostics' })
 
 -- File Tree
-map('n', '<leader>n', ":NvimTreeToggle <CR>", { silent = true })
+map('n', '<leader>n', ":NvimTreeToggle <CR>", { silent = true, desc = 'toggle nvim tree' })
 
 -- LuaSnip
 local ls = require('luasnip')
@@ -39,6 +30,7 @@ end, { silent = true })
 -- Telescope
 map('n', '<leader>fb', ':Telescope buffers<CR>', { silent = true })
 map('n', '<leader>fd', ':Telescope diagnostics<CR>', { silent = true })
+map('n', '<leader>fg', ':Telescope live_grep<CR>', { noremap = true, silent = true })
 map('n', '<leader>fu', ':lua require("telescope.builtin").lsp_references()<CR>', { noremap = true, silent = true })
 
 -- Hop
