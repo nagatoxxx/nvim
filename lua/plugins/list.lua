@@ -2,7 +2,9 @@ return {
     {
         'windwp/nvim-autopairs',
         event = "InsertEnter",
-        opts = {}
+        opts = {
+            enable_check_bracket_line = false,
+        }
     },
 
     {
@@ -90,7 +92,7 @@ return {
                 filetypes = { 'haskell', 'lhaskell', 'cabal' },
                 cmd = { "haskell-language-server-wrapper", "--lsp" }
             })
-            vim.lsp.enable({ 'clangd', 'cmake', 'qmlls' })
+            vim.lsp.enable({ 'clangd', 'cmake', 'qmlls', 'hls' })
         end,
     },
 
@@ -126,15 +128,6 @@ return {
             indent = {
                 char = '│',
             },
-            scope = {
-                enabled = true,
-                show_start = false,
-            },
-            exclude = {
-                filetypes = {
-                    'dashboard'
-                }
-            }
         }
     },
 
@@ -167,11 +160,7 @@ return {
         opts = {
             ensure_installed = {
                 'clangd',
-                'lua_ls',
                 'cmake',
-                -- 'texlab',
-                -- 'gopls'
-                -- 'pyright',
             }
         }
     },
